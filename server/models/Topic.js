@@ -9,8 +9,8 @@ module.exports = function( globals ) {
     {
       name: {
         type: String,
+        index: true,
         required: true,
-        unique: true,
         minlength: 1,
       }
     },

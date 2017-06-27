@@ -14,25 +14,27 @@ module.exports = {
 
   read_all: function( req, res ) {
     Topic.find({})
+      .populate('category')
       // .sort( '{{FIELD_NAME}}|-{{FIELD_NAME}}') // createdAt, -createdAt
       .catch( err => res.status( 500 ).json( err ) )
       .then( data => res.json( data ) );
   },
 
   read_one: function( req, res ) {
-    Topic.findOne({ _id: req.params.pk })
+    Topic.findOne({ name: req.params.pk })
+      .populate('category')
       .catch( err => res.status( 500 ).json( err ) )
       .then( data => res.json( data ) );
   },
 
   update: function( req, res ) {
-    Topic.updateOne({ _id: req.params.pk }, {$set: req.body})
+    Topic.updateOne({ name: req.params.pk }, {$set: req.body})
       .catch( err => res.status( 500 ).json( err ) )
       .then( () => res.json( true ) );
   },
 
   delete: function( req, res ) {
-    Topic.remove({ _id: req.params.pk })
+    Topic.remove({ name: req.params.pk })
       .catch( err => res.status( 500 ).json( err ) )
       .then( () => res.json( true ) );
   },

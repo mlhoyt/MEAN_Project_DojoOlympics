@@ -14,6 +14,8 @@ module.exports = {
 
   read_all: function( req, res ) {
     Exam.find({})
+      .populate('category')
+      .populate('q_series')
       // .sort( '{{FIELD_NAME}}|-{{FIELD_NAME}}') // createdAt, -createdAt
       .catch( err => res.status( 500 ).json( err ) )
       .then( data => res.json( data ) );
@@ -21,6 +23,8 @@ module.exports = {
 
   read_one: function( req, res ) {
     Exam.findOne({ _id: req.params.pk })
+      .populate('category')
+      .populate('q_series')
       .catch( err => res.status( 500 ).json( err ) )
       .then( data => res.json( data ) );
   },
