@@ -10,10 +10,11 @@ module.exports = function( globals ) {
   mongoose.Promise = global.Promise;
 
   mongoose.connect(
-    mongoose_uri,
-    {
-      useMongoClient: true,
-    }
+    mongoose_uri
+    // mongoose_uri,
+    // {
+    //   useMongoClient: true,
+    // }
   );
 
   let models_path = path.join( __dirname, './../models' );
