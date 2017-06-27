@@ -1,0 +1,24 @@
+# -*- text -*-
+
++-----------+-----------+----------+----------+
+| Category  | Topic     | Exam     | Question |
++-----------+-----------+----------+----------+
+| name      | name      |          | text     |
+|           |           |          | answer   |
++===========+===========+==========+==========+
+| _id       | _id       | _id      | _id      |
++- - - - - -+- - - - - -+- - - - - +- - - - - +
+  questions -1--------------------N- category
+             questions -1---------N- topic
+  exams -1-------------N- category
+             -        1-N q0topic
+             -        1-N q1topic
+             -        1-N q2topic
+             -        1-N q3topic
+             -        1-N q4topic
+             -        1-N q5topic
+             -        1-N q6topic
+             -        1-N q7topic
+             -        1-N q8topic
+             -        1-N q9topic
+             -        1-N q9topic
