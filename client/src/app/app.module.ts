@@ -8,8 +8,6 @@ import 'hammerjs';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from '@angular/material';
 
-import {MdCardModule} from '@angular/material';
-
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 
@@ -23,7 +21,7 @@ import { UserComponent } from './user/user.component';
     FormsModule,
     HttpModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
