@@ -5,9 +5,17 @@ let fs = require('fs');
 let path = require('path');
 
 module.exports = function( globals ) {
+  let mongoose_uri = 'mongodb://' + globals.DB_SERVER_PATH + '/' + globals.DB_NAME;
+
   mongoose.Promise = global.Promise;
 
-  mongoose.connect( 'mongodb://' + globals.DB_SERVER_PATH + '/' + globals.DB_NAME );
+  mongoose.connect(
+    mongoose_uri
+    // mongoose_uri,
+    // {
+    //   useMongoClient: true,
+    // }
+  );
 
   let models_path = path.join( __dirname, './../models' );
 
