@@ -1,0 +1,1 @@
+mongod --dbpath /Users/mhoyt/Desktop/DojoMisc/MEAN/Project/DojoOlympics/db/data/db >& /Users/mhoyt/Desktop/DojoMisc/MEAN/Project/DojoOlympics/logs/mongod.log &
