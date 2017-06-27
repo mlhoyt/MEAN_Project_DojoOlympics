@@ -1,0 +1,23 @@
+<md-card class = "questoin">
+  <md-card-title>Question</md-card-title>
+
+  <md-card-header>
+    <md-card-title>What season is right now</md-card-title>
+  </md-card-header>
+
+  <md-card-content>
+    <md-radio-group class="question-radio-group" [(ngModel)]="favoriteSeason">
+      <md-radio-button class="question-radio-button" *ngFor="let season of seasons" [value]="season">
+        {{season}}
+      </md-radio-button>
+    </md-radio-group>
+
+    <div class="question-selected-value">Your favorite season is: {{favoriteSeason}}</div>
+    
+  </md-card-content>
+
+  <md-card-actions>
+    <button md-button>Submit</button>
+  </md-card-actions>
+
+</md-card>
