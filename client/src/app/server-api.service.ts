@@ -17,16 +17,7 @@ export class ServerApiService {
       .map( data => data.json() )
       .toPromise();
   }
-
-  userLogin(username){
-    console.log("login service method")
-    return this._http.post("/admin", username).toPromise()
-  }
-
-  logout(){
-    return this._http.get("/logout").toPromise()
-  }
-
+  
   // create( item ) { return this._http.post( '{{URL}}', item ).map( data => data.json() ).toPromise(); }
   // read_all() { return this._http.get( '{{URL}}' ).map( data => data.json() ).toPromise(); }
   // read_one( pk ) { return this._http.get( '{{URL}}/' ).map( data => data.json() ).toPromise(); }
