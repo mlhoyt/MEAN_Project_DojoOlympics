@@ -13,9 +13,15 @@ export class ServerApiService {
   }
 
   get_all_categories() {
-    return this._http.get( '/actions/get_all_categories' )
+    return this._http.get( '/actions/get_all_categories ' )
       .map( data => data.json() )
       .toPromise();
+  }
+
+  get_exam_by_category(id) {
+    return this._http.get(' /actions/get_exam_by_category/' + id)
+    .map( data => data.json() )
+    .toPromise();
   }
   
   // create( item ) { return this._http.post( '{{URL}}', item ).map( data => data.json() ).toPromise(); }

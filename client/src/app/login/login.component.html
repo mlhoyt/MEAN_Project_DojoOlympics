@@ -8,12 +8,11 @@
           <input mdInput placeholder="Enter instructor phrase" type="text" name="adminPhrase" value="">
         </md-input-container>
       </md-card-content>
-        <button md-raised-button [routerLink]="['/admin']">Enter</button>
+        <button md-raised-button  (click)="newAdmin()">Enter</button>
     </form>
     
 </md-card>
 
-<<<<<<< HEAD
 <!--<div *ngif="admin">-->
   <md-card class="teamlogin" >
     <form name="userLoginForm">
@@ -29,16 +28,3 @@
     </form>
   </md-card>
 <!--</div>-->
-=======
-<md-card class="teamlogin">
-  <md-card-title>What's your team name?</md-card-title>
-  <md-card-content>
-    <form name="loginForm">
-      <md-input-container class="loginInput">
-        <input mdInput placeholder="Input your team name here" name="user_name" [(ngModel)]="user_name" />
-      </md-input-container>
-    </form>
-  </md-card-content>
-  <button md-raised-button (click)="doSendUserName()">Submit</button>
-</md-card>
->>>>>>> master

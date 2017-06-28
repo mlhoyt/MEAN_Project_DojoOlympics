@@ -48,6 +48,10 @@ const server = globals.app.listen( globals.WEB_SERVER_PORT, function() {
     console.log( 'Server listening on port', globals.WEB_SERVER_PORT ); // INFO
 });
 
+// Save socket admin id
+let admin_id = "";
+
+// SOCKET
 const io = require( 'socket.io' ).listen( server );
 
 io.on( 'connection', ( socket ) => {
@@ -63,7 +67,21 @@ io.on( 'connection', ( socket ) => {
 	// io.emit( '{{SERVER_EVENT_NAME}}', {{EVENT_DATA}}* );
 
 	// socket.on( '{{CLIENT_EVENT_NAME}}', () => { ... } )
+	socket.on( 'new_admin', ( ) => {
+    console.log( "Debug: Server: received socket event 'new_admin	' with socket.id:", socket.id);
+		this.admin_id = socket.id;
+  });
 	socket.on( 'new_user', ( data ) => {
     console.log( "Debug: Server: received socket event 'new_user' with data:", data );
   });
+	socket.on( 'new_question', ( data ) => {
+    console.log( "Debug: Server: received socket event 'new_question' with data:", data );
+		socket.broadcast.emit("new_question", data);
+  });
+	socket.on( 'update_answer', ( data ) => {
+		console.log( "Debug: Server: received socket event 'update_answer' with data:", data );
+		socket.to(admin_id).emit(data);
+	});
 });
+
+

@@ -13,6 +13,10 @@ export class SocketService {
   )
   {
     this.socket = io( this.url );
+    //Got question
+    this.socket.on( 'new_question', (data) => {
+     console.log('Got a new question', data)
+   } );
   }
 
   // connect() {
@@ -32,8 +36,22 @@ export class SocketService {
   //   return( observable );
   // };
 
+  new_admin() {
+    this.socket.emit( 'new_admin' );
+  }
+
   new_user( data ) {
     this.socket.emit( 'new_user', data );
+  }
+
+  // Admin send data to users
+  send_question = (data) => {
+    this.socket.emit( 'new_question', data );
+  }
+
+  //User send answer
+  update_answer = (data) => {
+    this.socket.emit( 'update_answer', data );
   }
 
   // get_clicks(){
