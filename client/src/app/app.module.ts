@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 
 import { ServerApiService } from './server-api.service';
+import { SocketService } from './socket.service';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 
@@ -33,6 +34,7 @@ import { LoginComponent } from './login/login.component';
   ],
   providers: [
     ServerApiService,
+    SocketService,
   ],
   bootstrap: [AppComponent]
 })

@@ -62,6 +62,8 @@ io.on( 'connection', ( socket ) => {
 	// - Blast Communication
 	// io.emit( '{{SERVER_EVENT_NAME}}', {{EVENT_DATA}}* );
 
-	// socket.on( '{{CLIENT_EVENT_NAME}}', () => {
-	// })
+	// socket.on( '{{CLIENT_EVENT_NAME}}', () => { ... } )
+	socket.on( 'new_user', ( data ) => {
+    console.log( "Debug: Server: received socket event 'new_user' with data:", data );
+  });
 });
