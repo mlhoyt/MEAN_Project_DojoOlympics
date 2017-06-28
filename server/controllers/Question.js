@@ -14,8 +14,6 @@ module.exports = {
 
   read_all: function( req, res ) {
     Question.find({})
-      .populate('category')
-      .populate('topic')
       // .sort( '{{FIELD_NAME}}|-{{FIELD_NAME}}') // createdAt, -createdAt
       .catch( err => res.status( 500 ).json( err ) )
       .then( data => res.json( data ) );
@@ -23,8 +21,6 @@ module.exports = {
 
   read_one: function( req, res ) {
     Question.findOne({ _id: req.params.pk })
-      .populate('category')
-      .populate('topic')
       .catch( err => res.status( 500 ).json( err ) )
       .then( data => res.json( data ) );
   },

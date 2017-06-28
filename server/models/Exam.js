@@ -14,7 +14,7 @@ module.exports = function( globals ) {
       },
       q_series: [{
         type: Schema.Types.ObjectId,
-        ref: 'Topic',
+        ref: 'Question',
         default: [],
       }]
     },

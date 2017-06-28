@@ -7,6 +7,11 @@ let Schema = mongoose.Schema;
 module.exports = function( globals ) {
   let QuestionSchema = new mongoose.Schema(
     {
+      topic: {
+        type: String,
+        required: true,
+        minlength: 1,
+      },
       text: {
         type: String,
         required: true,
@@ -16,14 +21,6 @@ module.exports = function( globals ) {
         type: String,
         required: true,
         minlength: 1,
-      },
-      category: {
-        type: Schema.Types.ObjectId,
-        ref: 'Category',
-      },
-      topic: {
-        type: Schema.Types.ObjectId,
-        ref: 'Topic',
       },
     },
     {
