@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
 
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -14,12 +13,14 @@ import { UserComponent } from './user/user.component';
 
 import { ServerApiService } from './server-api.service';
 import { AdminComponent } from './admin/admin.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
-    AdminComponent
+    AdminComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +28,6 @@ import { AdminComponent } from './admin/admin.component';
     HttpModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpModule,
   ],
   providers: [
     ServerApiService,
