@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -11,10 +12,14 @@ import {MaterialModule} from '@angular/material';
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 
+import { ServerApiService } from './server-api.service';
+import { AdminComponent } from './admin/admin.component';
+
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent
+    UserComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -22,8 +27,11 @@ import { UserComponent } from './user/user.component';
     HttpModule,
     BrowserAnimationsModule,
     MaterialModule,
+    HttpModule,
   ],
-  providers: [],
+  providers: [
+    ServerApiService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
