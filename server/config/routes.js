@@ -32,6 +32,7 @@ module.exports = function( globals ) {
   globals.app.delete ( '/api/questions/:pk', ( req, res ) => Question_ctrlr.delete   ( req, res ) );
 
   let mongoose = require('mongoose');
+
   let Category = mongoose.model( 'Category' );
 
   globals.app.get ( '/actions/get_all_categories', ( req, res ) => {
@@ -40,14 +41,14 @@ module.exports = function( globals ) {
       .then( data => res.json( data ) );
   });
 
-  globals.app.get ( '/actions/get_exam', ( req, res ) => {
-    res.json( true );
-    // if( req.session.category ) {
-    //   res.json( req.session.user );
-    // }
-    // else {
-    //   res.status( 500 ).json();
-    // }
+  let Exam = mongoose.model( 'Exam' );
+
+  globals.app.get ( '/actions/get_exam_by_category/:category_id', ( req, res ) => {
+    Exam.findOne({ category: req.params.category_id })
+      .populate('category')
+      .populate('q_series')
+      .catch( err => res.status( 500 ).json( err ) )
+      .then( data => res.json( data ) );
   });
 
   // Default (delegate to front-end router)
