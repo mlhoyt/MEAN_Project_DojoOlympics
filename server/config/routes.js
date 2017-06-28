@@ -42,7 +42,7 @@ module.exports = function( globals ) {
   let mongoose = require('mongoose');
   let Category = mongoose.model( 'Category' );
 
-  globals.app.get ( '/actions/get_categories', ( req, res ) => {
+  globals.app.get ( '/actions/get_all_categories', ( req, res ) => {
     Category.find({})
       .catch( err => res.status( 500 ).json( err ) )
       .then( data => res.json( data ) );
