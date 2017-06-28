@@ -10,13 +10,21 @@ export class ServerApiService {
     private _http: Http
   )
   {
-    
   }
 
   get_all_categories() {
     return this._http.get( '/actions/get_all_categories' )
       .map( data => data.json() )
       .toPromise();
+  }
+
+  userLogin(username){
+    console.log("login service method")
+    return this._http.post("/admin", username).toPromise()
+  }
+
+  logout(){
+    return this._http.get("/logout").toPromise()
   }
 
   // create( item ) { return this._http.post( '{{URL}}', item ).map( data => data.json() ).toPromise(); }

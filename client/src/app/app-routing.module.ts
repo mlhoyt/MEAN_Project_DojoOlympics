@@ -11,6 +11,8 @@ const routes: Routes = [
 // NOTE: component.ts: this._router.navigate( ['/{{URL}}', '{{URL}}'|{{VAR}}, ... ] );
 // { path: '{{URL}}', [ pathMatch: 'full', ] component: {{COMP}}Component },
 // { path: '{{URL}}', [ pathMatch: 'full', ] redirectTo: '/{{URL}}' },
+  { path: 'admin', component: AdminComponent },
+  { path: 'user', component: UserComponent},
   { path: '', pathMatch: 'full', component: LoginComponent },
 ];
 
