@@ -10,6 +10,7 @@ export class ServerApiService {
     private _http: Http
   )
   {
+    
   }
 
   get_all_categories() {

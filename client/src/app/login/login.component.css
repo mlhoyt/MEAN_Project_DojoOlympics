@@ -1,0 +1,17 @@
+.center{
+  display: block;
+  text-align: center;
+}
+
+.login {
+  width: 40%;
+  margin: 10px auto;
+}
+.teamlogin{
+  width: 40%;
+  margin: 10px auto;
+}
+.loginInput {
+  display: block;
+  width: 100%;
+}
