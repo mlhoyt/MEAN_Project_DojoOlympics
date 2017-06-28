@@ -20,9 +20,9 @@
   <md-card-content>
     <form name="loginForm">
       <md-input-container class="loginInput">
-        <input mdInput placeholder="Input your team name here" value="">
+        <input mdInput placeholder="Input your team name here" name="user_name" [(ngModel)]="user_name" />
       </md-input-container>
     </form>
   </md-card-content>
-  <button md-raised-button>Submit</button>
+  <button md-raised-button (click)="doSendUserName()">Submit</button>
 </md-card>
