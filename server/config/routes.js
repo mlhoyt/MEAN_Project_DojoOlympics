@@ -39,6 +39,25 @@ module.exports = function( globals ) {
   globals.app.put    ( '/api/questions/:pk', ( req, res ) => Question_ctrlr.update   ( req, res ) );
   globals.app.delete ( '/api/questions/:pk', ( req, res ) => Question_ctrlr.delete   ( req, res ) );
 
+  let mongoose = require('mongoose');
+  let Category = mongoose.model( 'Category' );
+
+  globals.app.get ( '/actions/get_categories', ( req, res ) => {
+    Category.find({})
+      .catch( err => res.status( 500 ).json( err ) )
+      .then( data => res.json( data ) );
+  });
+
+  globals.app.get ( '/actions/get_exam', ( req, res ) => {
+    res.json( true );
+    // if( req.session.category ) {
+    //   res.json( req.session.user );
+    // }
+    // else {
+    //   res.status( 500 ).json();
+    // }
+  });
+
   // Default (delegate to front-end router)
   globals.app.all( '*', ( req, res ) => res.sendFile( path.resolve( './client/dist/index.html' ) ) );
 }
