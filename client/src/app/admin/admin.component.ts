@@ -63,12 +63,18 @@ export class AdminComponent implements OnInit {
     this._socket.share_results(this.admin_data)
 
     //update score
-    
-
     //rest commit, answer, correct
+    for( let i in this.admin_data.teams ) {
+      let team = this.admin_data.teams[ i ];
+      team.score += team.correct;
+      team.answer = "";
+      team.commit = false;
+      team.correct = 0;
+    }
 
     //loop to next question
-  
+    this.question_num += 1;
+    console.log(this.question_num);
   }
 
   correct_answer(team_sid) {
