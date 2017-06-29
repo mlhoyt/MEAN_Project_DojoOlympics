@@ -19,7 +19,10 @@ export class AdminComponent implements OnInit {
   question_num = 0
   teams = [{name: 'user 1', score: 0}, {name: 'user 2', score: 0}, {name: 'user 3', score: 0}]
 
-  admin_data: any = {}
+  admin_data: any = {
+    teams: [
+    ],
+  };
 
   constructor(
     private _serverApi: ServerApiService,

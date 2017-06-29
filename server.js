@@ -100,13 +100,13 @@ io.on( 'connection', ( socket ) => {
 
 	socket.on( 'update_answer', ( data ) => {
 		console.log( "Debug: Server: received socket event 'update_answer' with data:", data );
-		socket.to( admin_id ).emit( data );
+		socket.to( admin_id ).emit( "update_answer", data );
     console.log( "Debug: Server: sent socket event 'update_answer' to admin(", admin_id, ") with data:", data );
 	});
 
 	socket.on( 'commit_answer', ( data ) => {
 		console.log( "Debug: Server: received socket event 'commit_answer' with data:", data );
-		socket.to( admin_id ).emit( data );
+		socket.to( admin_id ).emit( "commit_answer", data );
     console.log( "Debug: Server: sent socket event 'commit_answer' to admin(", admin_id, ") with data:", data );
 	});
 

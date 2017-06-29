@@ -9,6 +9,7 @@ import { SocketService } from '../socket.service';
 })
 export class UserComponent implements OnInit {
   user_data: any = { 'question_num': 0, 'question_text': '' };
+  answer_text = "";
   socket = null;
 
   constructor(
@@ -21,5 +22,13 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     console.log( "Debug: UserComponent: ngOnInit: activated" );
+  }
+
+  update_answer() {
+    console.log( "Debug: UserComponent: update_answer: answer_text:", this.answer_text );
+    this._socket.update_answer({
+      team: "not_sure",
+      answer: this.answer_text,
+    });
   }
 }
