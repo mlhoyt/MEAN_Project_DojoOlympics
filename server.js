@@ -66,6 +66,7 @@ let admin_data = {
     //  name: String,
     //  answer: String,
     //  score: Number,
+    //  correct: 1,
     // },
     // ...
   ],
@@ -98,7 +99,7 @@ io.on( 'connection', ( socket ) => {
 
 	socket.on( 'new_user', ( data ) => {
     console.log( "Debug: Server: received socket event 'new_user' with data:", data );
-    admin_data.teams.push( { sid: socket.id, name: data.user_name, answer: "", score: -1, commit: false } )
+    admin_data.teams.push( { sid: socket.id, name: data.user_name, answer: "", score: 0, commit: false, correct: 0 } )
 		if( admin_id ) {
 			socket.to( admin_id ).emit( "new_user", admin_data );
       console.log( "Debug: Server: sent socket event 'new_user' to admin(", admin_id, ") with data:", admin_data );

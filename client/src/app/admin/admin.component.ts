@@ -57,4 +57,30 @@ export class AdminComponent implements OnInit {
   end_question() {
     this._socket.end_question();
   }
+
+  next_question() {
+    //send admin_data
+    this._socket.share_results(this.admin_data)
+
+    //update score
+    
+
+    //rest commit, answer, correct
+
+    //loop to next question
+  
+  }
+
+  correct_answer(team_sid) {
+    for( let i in this.admin_data.teams ) {
+      let team = this.admin_data.teams[ i ];
+      if (team.sid == team_sid){
+        team.correct = 1;
+        break;
+      }
+    }
+  }
+
+
+
 }

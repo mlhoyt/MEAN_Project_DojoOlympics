@@ -12,7 +12,7 @@
   <md-card-actions>
     <button md-raised-button (click)="send_question()">Send</button>
     <button md-raised-button (click)="end_question()">End</button>
-    <button md-raised-button>Next</button>
+    <button md-raised-button (click)="next_question()">Next</button>
   </md-card-actions>
 </md-card>
 
@@ -25,7 +25,7 @@
         <md-grid-tile colspan="2">{{team.name}}</md-grid-tile>
         <md-grid-tile colspan="1">Score: {{team.score}}</md-grid-tile>
         <md-grid-tile colspan="4">{{ team.answer }}</md-grid-tile>
-        <md-grid-tile colspan="1"><button md-raised-button *ngIf="team.commit">Correct</button></md-grid-tile>
+        <md-grid-tile colspan="1"><button md-raised-button *ngIf="team.commit" (click)="correct_answer(team.sid)">Correct</button></md-grid-tile>
       </md-grid-list>
     </md-card-content>
   </md-card>
