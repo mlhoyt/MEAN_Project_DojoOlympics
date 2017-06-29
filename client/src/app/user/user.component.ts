@@ -13,7 +13,7 @@ export class UserComponent implements OnInit {
   show = false
   noShow = true
 
-  user_data: any = { 'question_num': 0, 'question_text': '', 'question_end': false };
+  user_data: any = { 'question_num': 0, 'question_text': '', 'question_end': false, 'correct': 0, 'score': 0};
   answer_text = "";
   socket = null;
 
@@ -42,5 +42,6 @@ export class UserComponent implements OnInit {
     });
     this.user_data.question_end = true;
   }
+
 
 }

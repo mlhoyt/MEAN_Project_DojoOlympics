@@ -52,6 +52,7 @@ export class SocketService {
 
       this.socket.on( 'share_results', ( data ) => {
         console.log( 'Debug: SocketService: received: share_results - data:', data );
+        observer.next( data );
       });
 
       this.socket.on( 'show_standings', ( data ) => {
