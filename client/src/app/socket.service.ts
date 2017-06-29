@@ -6,45 +6,55 @@ import * as io from 'socket.io-client';
 
 @Injectable()
 export class SocketService {
-  private url = "http://localhost:8000";
+  private url = 'http://localhost:8000';
   private socket;
 
-  constructor(
-  )
-  {
-    this.socket = io( this.url );
+  constructor(){}
 
-    // -------------------- ADMIN - RECEIVE --------------------
+  userGetsQuestion(){
+    let observable = new Observable( observer => {
+      console.log( "Debug: SocketService: connect: inside new Observable callback ..." );
+      this.socket = io( this.url );
+      console.log( "Debug: SocketService: connect: this.url:", this.url );
+      console.log( "Debug: SocketService: connect: this.socket:", this.socket );
+      // this.socket.on( "<EVENT>", ( <DATA> ) => { ... } );
 
-    this.socket.on( 'new_user', (data) => {
-      console.log( 'Debug: SocketService: received: new_user - data:', data );
+      // -------------------- ADMIN - RECEIVE --------------------
+
+      this.socket.on( 'new_user', (data) => {
+        console.log( 'Debug: SocketService: received: new_user - data:', data );
+      });
+
+      this.socket.on( 'update_answer', (data) => {
+        console.log( 'Debug: SocketService: received: update_answer - data:', data );
+      });
+
+      this.socket.on( 'commit_answer', (data) => {
+        console.log( 'Debug: SocketService: received: update_answer - data:', data );
+      });
+
+      // -------------------- USER - RECEIVE --------------------
+
+      this.socket.on( 'new_question', (data) => {
+        console.log( 'Debug: SocketService: received: new_question - data:', data );
+        observer.next(data)
+      });
+
+      this.socket.on( 'end_question', () => {
+        console.log( 'Debug: SocketService: received: end_question' );
+      });
+
+      this.socket.on( 'share_results', ( data ) => {
+        console.log( 'Debug: SocketService: received: share_results - data:', data );
+      });
+
+      this.socket.on( 'show_standings', ( data ) => {
+        console.log( 'Debug: SocketService: received: show_standings - data:', data );
+      });
+
+      return () => { this.socket.disconnect(); }
     });
-
-    this.socket.on( 'update_answer', (data) => {
-      console.log( 'Debug: SocketService: received: update_answer - data:', data );
-    });
-
-    this.socket.on( 'commit_answer', (data) => {
-      console.log( 'Debug: SocketService: received: update_answer - data:', data );
-    });
-
-    // -------------------- USER - RECEIVE --------------------
-
-    this.socket.on( 'new_question', (data) => {
-      console.log( 'Debug: SocketService: received: new_question - data:', data );
-    });
-
-    this.socket.on( 'end_question', () => {
-      console.log( 'Debug: SocketService: received: end_question' );
-    });
-
-    this.socket.on( 'share_results', ( data ) => {
-      console.log( 'Debug: SocketService: received: share_results - data:', data );
-    });
-
-    this.socket.on( 'show_standings', ( data ) => {
-      console.log( 'Debug: SocketService: received: show_standings - data:', data );
-    });
+    return observable;
   }
 
   // -------------------- ADMIN - SEND --------------------
@@ -91,13 +101,4 @@ export class SocketService {
     this.socket.emit( 'commit_answer', data );
   }
 
-  //   let observable = new Observable( observer => {
-  //     console.log( "Debug: SocketService: connect: inside new Observable callback ..." );
-  //     this.socket = io( this.url );
-  //     console.log( "Debug: SocketService: connect: this.url:", this.url );
-  //     console.log( "Debug: SocketService: connect: this.socket:", this.socket );
-  //     // this.socket.on( "<EVENT>", ( <DATA> ) => { ... } );
-  //     return () => { this.socket.disconnect(); }
-  //   });
-  //   return( observable );
 }

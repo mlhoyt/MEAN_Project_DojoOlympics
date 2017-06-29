@@ -1,34 +1,29 @@
-
-<md-card class="chooseExam">
-  <form >
+<md-card class="chooseExam" *ngIf="exam_selected">
   <md-select placeholder="Catagory" [(ngModel)]="exam_cat" name="exam_cat">
    <md-option *ngFor="let cat of all_cats" value="{{cat._id}}"> {{ cat.name }} </md-option>
   </md-select>
   <button md-raised-button (click)="get_exam()">Submit</button>
-  </form>
 </md-card>
 
-
-<button md-raised-button disabled>Start the exam</button>
-
-<h2>Teams</h2>
+<div *ngIf="team_dispay">
 <!-- card will be genereated after user input teamname -->
-
-<md-card class="userList" *ngFor="let team of teams">
-  <button md-button disabled (click)="answer_correct">
-  <md-card-title>{{team.name}}</md-card-title>
-  <md-card-content>
-    <p>something here here for answer</p>
-  </md-card-content>
-  <md-card-subtitle>{{team.score}}</md-card-subtitle>
-  </button>
-</md-card>
-
+  <md-card class="userList">
+    <md-card-title>Teams</md-card-title>
+    <md-card-content *ngFor="let team of teams" style="margin: 16px 0;">
+      <md-grid-list cols="8" rowHeight="40px">
+        <md-grid-tile colspan="2">{{team.name}}</md-grid-tile>
+        <md-grid-tile colspan="1">Score: {{team.score}}</md-grid-tile>
+        <md-grid-tile colspan="4">something here here for answer</md-grid-tile>
+        <md-grid-tile colspan="1"><button md-raised-button>Correct</button></md-grid-tile>
+      </md-grid-list>
+    </md-card-content>
+  </md-card>
+</div>
 
 <md-card *ngIf="all_exam.q_series.length > 0" class="questionAnswer" style="margin: 10px 0">
   <md-card-subtitle>Queston {{question_num + 1}}</md-card-subtitle>
   <md-card-title><pre>{{all_exam.q_series[question_num].text}}</pre></md-card-title>
-  <md-card-content><pre>{{all_exam.q_series[question_num].answer}}</pre></md-card-content>
+  <md-card-content>The suggested answer is: <pre>{{all_exam.q_series[question_num].answer}}</pre></md-card-content>
   <md-card-actions>
     <button md-raised-button (click)="send_question()">Send</button>
     <button md-raised-button (click)="end_question()">End</button>

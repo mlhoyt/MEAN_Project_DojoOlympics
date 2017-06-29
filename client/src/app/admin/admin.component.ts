@@ -10,10 +10,15 @@ import { SocketService } from '../socket.service';
 export class AdminComponent implements OnInit {
 
   all_cats = []
-  all_exam = {q_series:[]}
+  all_exam = {q_series: []}
+
+  // set show and hide DOM
+  exam_selected = true
+  team_dispay = false
+
   exam_cat = ''
   question_num = 0
-  teams = [{name:'user 1', score:0},{name:'user 2', score:0}, {name:'user 3', score:0}]
+  teams = [{name: 'user 1', score: 0}, {name: 'user 2', score: 0}, {name: 'user 3', score: 0}]
 
   constructor(
     private _serverApi: ServerApiService,
@@ -28,17 +33,19 @@ export class AdminComponent implements OnInit {
     .catch(err => console.log('theres a error getting all categories', err))
   }
 
-  get_exam(){
+  get_exam() {
     this._serverApi.get_exam_by_category(this.exam_cat)
     .then(data => this.all_exam = data)
     .catch(err => console.log('theres a error getting all categories', err))
+    this.exam_selected = false
+    this.team_dispay = true
   }
-  send_question(){
-    this._socket.send_question({questions_num:this.question_num,
-     question_text:this.all_exam.q_series[this.question_num].text
+  send_question() {
+    this._socket.send_question({questions_num: this.question_num,
+     question_text: this.all_exam.q_series[this.question_num].text
     });
   }
-  end_question(){
+  end_question() {
     this._socket.end_question();
   }
 

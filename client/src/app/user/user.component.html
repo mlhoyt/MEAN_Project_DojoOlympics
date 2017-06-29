@@ -1,8 +1,7 @@
-
-
+<!-- question card -->
 <md-card class = "question">
-  <md-card-header><md-card-subtitle>Question</md-card-subtitle></md-card-header>
-    <md-card-title style="background:#2196F3; padding:12px 0 12px 24px;">What season is right now?</md-card-title>
+  <md-card-header><md-card-subtitle>Question {{String(user_data.question_num+1)}}</md-card-subtitle></md-card-header>
+    <md-card-title style="background:#2196F3; padding:12px 0 12px 24px;">{{user_data.question_text}}</md-card-title>
 
   <md-card-content style="background:#777;">
     <form class="userAnswer">

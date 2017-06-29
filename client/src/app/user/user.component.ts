@@ -9,10 +9,14 @@ import { SocketService } from '../socket.service';
 })
 export class UserComponent implements OnInit {
 
+  user_data:any = {'question_num': 0, 'question_text': ''}
+  socket = null;
 
-  constructor() { }
+  constructor(private _socket: SocketService) { }
 
   ngOnInit() {
+    this._socket.userGetsQuestion().subscribe((data) => this.user_data = data)
   }
 
+ 
 }
