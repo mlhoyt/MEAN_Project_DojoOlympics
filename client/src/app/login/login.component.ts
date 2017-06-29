@@ -29,13 +29,14 @@ export class LoginComponent implements OnInit {
       this._router.navigate(["/admin"]);
   }
 
-  doSendUserName() {
+  newUser() {
     if( this.user_name != "" ) {
-      console.log( "Debug: LoginComponent: doSendUserName: sending socket event 'new_user'" );
+      console.log( "Debug: LoginComponent: newUser: sending socket event 'new_user'" );
       this._socket.new_user( { user_name: this.user_name } );
+      this._router.navigate(["/user"])
     }
     else {
-      console.log( "Debug: LoginComponent: doSendUserName: ignoring click event with empty user_name" );
+      console.log( "Debug: LoginComponent: newUser: ignoring click event with empty user_name" );
     }
   }
 }

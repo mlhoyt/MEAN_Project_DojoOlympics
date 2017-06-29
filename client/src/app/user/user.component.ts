@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ServerApiService } from '../server-api.service';
+import { SocketService } from '../socket.service';
 
 @Component({
   selector: 'app-user',
@@ -6,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
+
 
   constructor() { }
 

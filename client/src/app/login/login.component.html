@@ -2,29 +2,23 @@
 
 <md-card class="login">
   <md-card-title>Admin login</md-card-title>
-    <form (submit)="login(formData)" #formData = "ngForm">
+
       <md-card-content>
         <md-input-container class="loginInput">
           <input mdInput placeholder="Enter instructor phrase" type="text" name="adminPhrase" value="">
         </md-input-container>
       </md-card-content>
-        <button md-raised-button  (click)="newAdmin()">Enter</button>
-    </form>
-    
+        <button md-raised-button  (click)="newAdmin()">Enter</button>    
 </md-card>
 
 <!--<div *ngif="admin">-->
   <md-card class="teamlogin" >
-    <form name="userLoginForm">
     <md-card-title>What's your team name?</md-card-title>
     <md-card-content>
-      <form name="loginForm">
-        <md-input-container class="loginInput">
-          <input mdInput placeholder="Enter your team name" value="">
+        <md-input-container class="loginInput" >
+          <input mdInput placeholder="Enter your team name" name="user_name" [(ngModel)]="user_name" >
         </md-input-container>
-      </form>
     </md-card-content>
-    <button md-raised-button [routerLink]="['/user']">Submit</button>
-    </form>
+    <button md-raised-button (click)="newUser()">Submit</button>
   </md-card>
 <!--</div>-->

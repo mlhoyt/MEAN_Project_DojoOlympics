@@ -50,7 +50,7 @@ const server = globals.app.listen( globals.WEB_SERVER_PORT, function() {
 
 // Save socket admin id
 let admin_id = "";
-
+let user_backlog = [];
 // SOCKET
 const io = require( 'socket.io' ).listen( server );
 
@@ -73,6 +73,11 @@ io.on( 'connection', ( socket ) => {
   });
 	socket.on( 'new_user', ( data ) => {
     console.log( "Debug: Server: received socket event 'new_user' with data:", data );
+			if (this.admin_id){
+				socket.to(this.admin_id).emit("new_user", data)
+			} else {
+				user_backlog.push(data.user_name)
+			}
   });
 	socket.on( 'new_question', ( data ) => {
     console.log( "Debug: Server: received socket event 'new_question' with data:", data );
