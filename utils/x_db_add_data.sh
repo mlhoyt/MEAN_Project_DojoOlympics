@@ -1,27 +1,30 @@
 # -*- shell -*-
 
 ######################################################################
-# Category/ies
+# Cheatsheet
 ######################################################################
 
-# mongo << EOHI
+# show dbs
 # use DojoOlympics
-# db.categories.remove({})
-# db.categories.insert({"name":"JavaScript 1"})
-# exit
-# EOHI
+# db.dropDatabase()
+#
+# show collections
+# db.<COLLECTION>.drop()
+# db.<COLLECTION>.remove({})
+# db.<COLLECTION>.insert({"name":"Python 1"})
+# db.<COLLECTION>.insert({"name":"Python RegEx 1"})
 
-# db.categories.insert({"name":"Python 1"})
-# db.categories.insert({"name":"Python RegEx 1"})
-
-# curl \
-#   -X GET \
-#   http://localhost:8000/api/categories \
-# | python -m json.tool
+# curl -X GET http://localhost:8000/api/categories | python -m json.tool
 
 ######################################################################
 # JavaScript I
 ######################################################################
+
+# mongo << EOHI
+# use DojoOlympics
+# db.categories.insert({"name":"JavaScript 1"})
+# exit
+# EOHI
 
 # mongo << EOHI
 # use DojoOlympics
@@ -61,6 +64,58 @@
 # exit
 # EOHI
 
+######################################################################
+# JavaScript II
+######################################################################
+
+# mongo << EOHI
+# use DojoOlympics
+# db.categories.insert({"name":"JavaScript 2"})
+# exit
+# EOHI
+
+# mongo << EOHI
+# use DojoOlympics
+# c = db.categories.findOne({name: "JavaScript 2"})
+# db.exams.insert({"category":c._id})
+# e = db.exams.findOne({category: c._id})
+
+# db.questions.insert({topic:"Looping ForIn Array of Objects", text:"var myObjs = [\n", answer:""})
+# q = db.questions.findOne({topic:"Looping ForIn Array of Objects"})
+# db.exams.update({_id: e._id},{$push: {q_series: q._id}})
+
+# db.questions.insert({topic:"", text:"", answer:""})
+# q = db.questions.findOne({topic:""})
+# db.exams.update({_id: e._id},{$push: {q_series: q._id}})
+
+# db.questions.insert({topic:"", text:"", answer:""})
+# q = db.questions.findOne({topic:""})
+# db.exams.update({_id: e._id},{$push: {q_series: q._id}})
+
+# db.questions.insert({topic:"", text:"", answer:""})
+# q = db.questions.findOne({topic:""})
+# db.exams.update({_id: e._id},{$push: {q_series: q._id}})
+
+# db.questions.insert({topic:"", text:"", answer:""})
+# q = db.questions.findOne({topic:""})
+# db.exams.update({_id: e._id},{$push: {q_series: q._id}})
+# db.questions.insert({topic:"", text:"", answer:""})
+# q = db.questions.findOne({topic:""})
+# db.exams.update({_id: e._id},{$push: {q_series: q._id}})
+# db.questions.insert({topic:"", text:"", answer:""})
+# q = db.questions.findOne({topic:""})
+# db.exams.update({_id: e._id},{$push: {q_series: q._id}})
+# db.questions.insert({topic:"", text:"", answer:""})
+# q = db.questions.findOne({topic:""})
+# db.exams.update({_id: e._id},{$push: {q_series: q._id}})
+# db.questions.insert({topic:"", text:"", answer:""})
+# q = db.questions.findOne({topic:""})
+# db.exams.update({_id: e._id},{$push: {q_series: q._id}})
+# db.questions.insert({topic:"", text:"", answer:""})
+# q = db.questions.findOne({topic:""})
+# db.exams.update({_id: e._id},{$push: {q_series: q._id}})
+# exit
+# EOHI
 
 # # 11- Looping_ForIn_ArrayOfObject1
 # var myObjs = [
