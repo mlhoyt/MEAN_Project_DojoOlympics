@@ -11,6 +11,11 @@ export class AdminComponent implements OnInit {
 
   all_cats = []
   all_exam = {q_series:[]}
+  
+  //set show and hide DOM
+  exam_selected = true
+  team_dispay = false
+
   exam_cat = ''
   question_num = 0
   teams = [{name:'user 1', score:0},{name:'user 2', score:0}, {name:'user 3', score:0}]
@@ -32,6 +37,8 @@ export class AdminComponent implements OnInit {
     this._serverApi.get_exam_by_category(this.exam_cat)
     .then(data => this.all_exam = data)
     .catch(err => console.log('theres a error getting all categories', err))
+    this.exam_selected = false
+    this.team_dispay = true
   }
   send_question(){
     this._socket.send_question({questions_num:this.question_num,
