@@ -45,8 +45,9 @@ export class AdminComponent implements OnInit {
   }
 
   send_question() {
-    this._socket.send_question({questions_num: this.question_num,
-      question_text: this.all_exam.q_series[this.question_num].text
+    this._socket.send_question({
+      question_num: this.question_num,
+      question_text: this.all_exam.q_series[this.question_num].text,
     });
   }
 
