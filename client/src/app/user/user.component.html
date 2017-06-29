@@ -1,5 +1,5 @@
 <!-- question card -->
-<md-card class = "question">
+<md-card class = "question" *ngIf="!user_data.question_end">
   <md-card-header>
     <md-card-subtitle>
       Question {{ user_data.question_num + 1 }}
@@ -20,4 +20,8 @@
   <md-card-actions>
     <button md-raised-button (click)="commit_answer()">Submit</button>
   </md-card-actions>
+</md-card>
+
+<md-card class = "waiting">
+  <h1> Waitng card </h1>
 </md-card>

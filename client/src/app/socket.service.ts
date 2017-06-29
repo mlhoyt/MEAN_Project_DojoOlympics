@@ -45,8 +45,9 @@ export class SocketService {
         observer.next( data );
       });
 
-      this.socket.on( 'end_question', () => {
+      this.socket.on( 'end_question', (data) => {
         console.log( 'Debug: SocketService: received: end_question' );
+        observer.next( data );
       });
 
       this.socket.on( 'share_results', ( data ) => {

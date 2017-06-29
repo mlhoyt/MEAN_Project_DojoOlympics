@@ -107,8 +107,13 @@ io.on( 'connection', ( socket ) => {
 
 	socket.on( 'new_question', ( data ) => {
     console.log( "Debug: Server: received socket event 'new_question' with data:", data );
-		socket.broadcast.emit( "new_question", data );
-    console.log( "Debug: Server: sent socket event 'new_question' to all users with data:", data );
+    user_data = {
+      question_num: data.question_num,
+      question_text: data.question_text,
+      question_end: false
+    }
+		socket.broadcast.emit( "new_question", user_data );
+    console.log( "Debug: Server: sent socket event 'new_question' to all users with data:", user_data );
   });
 
 	socket.on( 'update_answer', ( data ) => {
@@ -137,9 +142,15 @@ io.on( 'connection', ( socket ) => {
     console.log( "Debug: Server: sent socket event 'commit_answer' to admin(", admin_id, ") with data:", admin_data );
 	});
 
-	socket.on( 'end_question', () => {
+	socket.on( 'end_question', ( data ) => {
     console.log( "Debug: Server: received socket event 'end_question'" );
-		socket.broadcast.emit( "end_question" );
+    for( let i in admin_data.teams ) {
+      let team = admin_data.teams[ i ];
+      team.commit = true;
+    }
+		socket.emit( "update_answer", admin_data );
+    user_data.question_end = true;
+		socket.broadcast.emit( "end_question", user_data);
     console.log( "Debug: Server: sent socket event 'end_question' to all users" );
   });
 

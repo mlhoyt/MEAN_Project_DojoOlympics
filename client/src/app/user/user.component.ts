@@ -13,7 +13,7 @@ export class UserComponent implements OnInit {
   show = false
   noShow = true
 
-  user_data: any = { 'question_num': 0, 'question_text': '' };
+  user_data: any = { 'question_num': 0, 'question_text': '', 'question_end': false };
   answer_text = "";
   socket = null;
 
@@ -40,5 +40,7 @@ export class UserComponent implements OnInit {
     this._socket.commit_answer({
       answer: this.answer_text,
     });
+    this.user_data.question_end = true;
   }
+
 }
