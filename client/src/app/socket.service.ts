@@ -13,74 +13,74 @@ export class SocketService {
   )
   {
     this.socket = io( this.url );
-    //Got question
+
+    // -------------------- ADMIN - RECEIVE --------------------
+
+    this.socket.on( 'update_answer', (data) => {
+      console.log( 'Debug: SocketService: received: update_answer - data:', data );
+    });
+
+    this.socket.on( 'commit_answer', (data) => {
+      console.log( 'Debug: SocketService: received: update_answer - data:', data );
+    });
+
+    // -------------------- USER - RECEIVE --------------------
+
     this.socket.on( 'new_question', (data) => {
-     console.log('Got a new question', data)
-   } );
+      console.log( 'Debug: SocketService: received: new_question - data:', data );
+    });
+
     this.socket.on( 'end_question', () => {
-     console.log('end question')
-   } );
+      console.log( 'Debug: SocketService: received: end_question' );
+    });
   }
 
-  // connect() {
-  //   console.log( "Debug: SocketService: connect: activated..." );
-  //   // let observable = new Observable( observer => {
-  //   //   console.log( "Debug: SocketService: connect: inside new Observable callback ..." );
-  //   //   this.socket = io( this.url );
-  //   //   console.log( "Debug: SocketService: connect: this.url:", this.url );
-  //   //   console.log( "Debug: SocketService: connect: this.socket:", this.socket );
-  //   //
-  //   //   // this.socket.on( "<EVENT>", ( <DATA> ) => { ... } );
-  //   //
-  //   //   return () => { this.socket.disconnect(); }
-  //   // });
-  //
-  //   console.log( "Debug: SocketService: connect: return:", observable );
-  //   return( observable );
-  // };
+  // -------------------- ADMIN - SEND --------------------
 
   new_admin() {
+    console.log( 'Debug: SocketService: sent: new_admin' );
     this.socket.emit( 'new_admin' );
   }
 
-  new_user( data ) {
-    this.socket.emit( 'new_user', data );
-  }
-
-  // Admin send data to users
-  send_question = (data) => {
+  send_question( data ) {
+    console.log( 'Debug: SocketService: sent: new_question - data:', data );
     this.socket.emit( 'new_question', data );
   }
 
-  //User send answer
-  update_answer = (data) => {
-    this.socket.emit( 'update_answer', data );
-  }
-
-  //admin stops all users from answering quetsion
-  end_question(){
+  end_question() {
+    console.log( 'Debug: SocketService: sent: end_question' );
     this.socket.emit ( 'end_question' );
   }
 
+  share_results( data ) {
+    console.log( 'Debug: SocketService: sent: share_results - data:', data );
+    this.socket.emit ( 'share_results', data );
+  }
 
+  show_standings( data ) {
+    console.log( 'Debug: SocketService: sent: show_standings - data:', data );
+    this.socket.emit ( 'show_standings', data );
+  }
 
-  // get_clicks(){
-  //   let observable = new Observable(observer => {
-  //     this.socket = io(this.url)
-  //
-  //     this.socket.on("update_count", (data) => {
-  //       observer.next(data)
-  //     })
-  //
-  //     return () => {
-  //       this.socket.disconnect()
-  //     }
-  //   })
-  //
-  //   return observable
-  // }
+  // -------------------- USER - SEND --------------------
 
-  // click_button(){
-  //   this.socket.emit("click_button")
-  // }
+  new_user( data ) {
+    console.log( 'Debug: SocketService: sent: new_user - data:', data );
+    this.socket.emit( 'new_user', data );
+  }
+
+  update_answer( data ) {
+    console.log( 'Debug: SocketService: sent: update_answer - data:', data );
+    this.socket.emit( 'update_answer', data );
+  }
+
+  //   let observable = new Observable( observer => {
+  //     console.log( "Debug: SocketService: connect: inside new Observable callback ..." );
+  //     this.socket = io( this.url );
+  //     console.log( "Debug: SocketService: connect: this.url:", this.url );
+  //     console.log( "Debug: SocketService: connect: this.socket:", this.socket );
+  //     // this.socket.on( "<EVENT>", ( <DATA> ) => { ... } );
+  //     return () => { this.socket.disconnect(); }
+  //   });
+  //   return( observable );
 }
