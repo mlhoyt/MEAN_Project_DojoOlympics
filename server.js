@@ -73,21 +73,21 @@ io.on( 'connection', ( socket ) => {
 
 	socket.on( 'new_admin', ( ) => {
     console.log( "Debug: Server: received socket event 'new_admin' with socket.id:", socket.id);
-		this.admin_id = socket.id;
+		admin_id = socket.id;
     console.log( "Debug: Server: processing user_backlog:" );
     for( let user in user_backlog ) {
-			socket.to( this.admin_id ).emit( "new_user", user );
-      console.log( "Debug: Server: sent socket event 'new_user' to admin with data:", user );
+			socket.emit( "new_user", user_backlog[ user ] );
+      console.log( "Debug: Server: sent socket event 'new_user' to admin(", admin_id, ") with data:", user_backlog[ user ] );
     }
   });
 
 	socket.on( 'new_user', ( data ) => {
     console.log( "Debug: Server: received socket event 'new_user' with data:", data );
-		if( this.admin_id ) {
-			socket.to( this.admin_id ).emit( "new_user", data );
-      console.log( "Debug: Server: sent socket event 'new_user' to admin with data:", data );
+		if( admin_id ) {
+			socket.to( admin_id ).emit( "new_user", data );
+      console.log( "Debug: Server: sent socket event 'new_user' to admin(", admin_id, ") with data:", data );
 		} else {
-			this.user_backlog.push( data );
+			user_backlog.push( data );
       console.log( "Debug: Server: stored 'new_user' to user_backlog:", data );
 		}
   });
@@ -100,14 +100,14 @@ io.on( 'connection', ( socket ) => {
 
 	socket.on( 'update_answer', ( data ) => {
 		console.log( "Debug: Server: received socket event 'update_answer' with data:", data );
-		socket.to( this.admin_id ).emit( data );
-    console.log( "Debug: Server: sent socket event 'update_answer' to admin with data:", data );
+		socket.to( admin_id ).emit( data );
+    console.log( "Debug: Server: sent socket event 'update_answer' to admin(", admin_id, ") with data:", data );
 	});
 
 	socket.on( 'commit_answer', ( data ) => {
 		console.log( "Debug: Server: received socket event 'commit_answer' with data:", data );
-		socket.to( this.admin_id ).emit( data );
-    console.log( "Debug: Server: sent socket event 'commit_answer' to admin with data:", data );
+		socket.to( admin_id ).emit( data );
+    console.log( "Debug: Server: sent socket event 'commit_answer' to admin(", admin_id, ") with data:", data );
 	});
 
 	socket.on( 'end_question', () => {
