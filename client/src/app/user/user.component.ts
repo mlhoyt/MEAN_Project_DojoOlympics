@@ -8,15 +8,18 @@ import { SocketService } from '../socket.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-
-  user_data:any = {'question_num': 0, 'question_text': ''}
+  user_data: any = { 'question_num': 0, 'question_text': '' };
   socket = null;
 
-  constructor(private _socket: SocketService) { }
-
-  ngOnInit() {
-    this._socket.userGetsQuestion().subscribe((data) => this.user_data = data)
+  constructor(
+    private _socket: SocketService,
+  )
+  {
+    console.log( "Debug: UserComponent: constructor: activated" );
+    this._socket.setup().subscribe( data => this.user_data = data );
   }
 
- 
+  ngOnInit() {
+    console.log( "Debug: UserComponent: ngOnInit: activated" );
+  }
 }

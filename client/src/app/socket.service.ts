@@ -9,14 +9,16 @@ export class SocketService {
   private url = 'http://localhost:8000';
   private socket;
 
-  constructor(){}
+  constructor()
+  {
+    console.log( "Debug: SocketService: setup: this.url:", this.url );
+    this.socket = io( this.url );
+    console.log( "Debug: SocketService: setup: this.socket:", this.socket );
+  }
 
-  userGetsQuestion(){
+  setup(){
     let observable = new Observable( observer => {
-      console.log( "Debug: SocketService: connect: inside new Observable callback ..." );
-      this.socket = io( this.url );
-      console.log( "Debug: SocketService: connect: this.url:", this.url );
-      console.log( "Debug: SocketService: connect: this.socket:", this.socket );
+      console.log( "Debug: SocketService: inside new Observable callback ..." );
       // this.socket.on( "<EVENT>", ( <DATA> ) => { ... } );
 
       // -------------------- ADMIN - RECEIVE --------------------
@@ -37,7 +39,7 @@ export class SocketService {
 
       this.socket.on( 'new_question', (data) => {
         console.log( 'Debug: SocketService: received: new_question - data:', data );
-        observer.next(data)
+        observer.next( data );
       });
 
       this.socket.on( 'end_question', () => {
