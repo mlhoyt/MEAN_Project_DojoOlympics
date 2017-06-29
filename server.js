@@ -48,50 +48,83 @@ const server = globals.app.listen( globals.WEB_SERVER_PORT, function() {
     console.log( 'Server listening on port', globals.WEB_SERVER_PORT ); // INFO
 });
 
-// Save socket admin id
-let admin_id = "";
-let user_backlog = [];
-
-// SOCKET
+// ----------------------------------------------------------------------
+// SOCKET COMMUNICATION
+// ----------------------------------------------------------------------
 const io = require( 'socket.io' ).listen( server );
 
+// Store admin socket id
+let admin_id = "";
+
+// Temporarily store users that connect before admin
+let user_backlog = [];
+
 io.on( 'connection', ( socket ) => {
-	console.log("Debug: New socket connection:", socket.id );
+	console.log("Debug: Server: new socket connection:", socket.id );
   // We talked about storing team names and associated scores in session
   // - In the demo it was just stored in globals.app... a bad practice?
 
-	// - P2P Communication
+	// - client-to-server P2P Communication
 	// socket.emit( '{{SERVER_EVENT_NAME}}', {{EVENT_DATA}}* );
 	// - Broadcast Communication
 	// socket.broadcast.emit( '{{SERVER_EVENT_NAME}}', {{EVENT_DATA}}* );
 	// - Blast Communication
 	// io.emit( '{{SERVER_EVENT_NAME}}', {{EVENT_DATA}}* );
 
-	// socket.on( '{{CLIENT_EVENT_NAME}}', () => { ... } )
 	socket.on( 'new_admin', ( ) => {
-    console.log( "Debug: Server: received socket event 'new_admin	' with socket.id:", socket.id);
+    console.log( "Debug: Server: received socket event 'new_admin' with socket.id:", socket.id);
 		this.admin_id = socket.id;
+    console.log( "Debug: Server: processing user_backlog:" );
+    for( let user in user_backlog ) {
+			socket.to( this.admin_id ).emit( "new_user", user );
+      console.log( "Debug: Server: sent socket event 'new_user' to admin with data:", user );
+    }
   });
+
 	socket.on( 'new_user', ( data ) => {
     console.log( "Debug: Server: received socket event 'new_user' with data:", data );
-			if (this.admin_id){
-				socket.to(this.admin_id).emit("new_user", data)
-			} else {
-				user_backlog.push(data.user_name);
-			}
+		if( this.admin_id ) {
+			socket.to( this.admin_id ).emit( "new_user", data );
+      console.log( "Debug: Server: sent socket event 'new_user' to admin with data:", data );
+		} else {
+			this.user_backlog.push( data );
+      console.log( "Debug: Server: stored 'new_user' to user_backlog:", data );
+		}
   });
+
 	socket.on( 'new_question', ( data ) => {
     console.log( "Debug: Server: received socket event 'new_question' with data:", data );
-		socket.broadcast.emit("new_question", data);
+		socket.broadcast.emit( "new_question", data );
+    console.log( "Debug: Server: sent socket event 'new_question' to all users with data:", data );
   });
+
 	socket.on( 'update_answer', ( data ) => {
 		console.log( "Debug: Server: received socket event 'update_answer' with data:", data );
-		socket.to(admin_id).emit(data);
+		socket.to( this.admin_id ).emit( data );
+    console.log( "Debug: Server: sent socket event 'update_answer' to admin with data:", data );
 	});
-		socket.on( 'end_question', ( ) => {
+
+	socket.on( 'commit_answer', ( data ) => {
+		console.log( "Debug: Server: received socket event 'commit_answer' with data:", data );
+		socket.to( this.admin_id ).emit( data );
+    console.log( "Debug: Server: sent socket event 'commit_answer' to admin with data:", data );
+	});
+
+	socket.on( 'end_question', () => {
     console.log( "Debug: Server: received socket event 'end_question'" );
 		socket.broadcast.emit( "end_question" );
+    console.log( "Debug: Server: sent socket event 'end_question' to all users" );
   });
+
+	socket.on( 'share_results', ( data ) => {
+		console.log( "Debug: Server: received socket event 'share_results' with data:", data );
+		socket.broadcast.emit( "share_results", data );
+    console.log( "Debug: Server: sent socket event 'share_results' to all users with data:", data );
+	});
+
+	socket.on( 'show_standings', ( data ) => {
+		console.log( "Debug: Server: received socket event 'show_standings' with data:", data );
+		socket.broadcast.emit( "show_standings", data );
+    console.log( "Debug: Server: sent socket event 'show_standings' to all users with data:", data );
+	});
 });
-
-
