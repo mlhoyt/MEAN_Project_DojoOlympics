@@ -15,12 +15,15 @@
 <!-- card will be genereated after user input teamname -->
 
 <md-card class="userList" *ngFor="let team of teams">
+  <button md-button disabled (click)="answer_correct">
   <md-card-title>{{team.name}}</md-card-title>
   <md-card-content>
     <p>something here here for answer</p>
   </md-card-content>
   <md-card-subtitle>{{team.score}}</md-card-subtitle>
+  </button>
 </md-card>
+
 
 <md-card *ngIf="all_exam.q_series.length > 0" class="questionAnswer" style="margin: 10px 0">
   <md-card-subtitle>Queston {{question_num + 1}}</md-card-subtitle>
