@@ -33,6 +33,14 @@ export class SocketService {
     this.socket.on( 'end_question', () => {
       console.log( 'Debug: SocketService: received: end_question' );
     });
+
+    this.socket.on( 'share_results', ( data ) => {
+      console.log( 'Debug: SocketService: received: share_results - data:', data );
+    });
+
+    this.socket.on( 'show_standings', ( data ) => {
+      console.log( 'Debug: SocketService: received: show_standings - data:', data );
+    });
   }
 
   // -------------------- ADMIN - SEND --------------------
@@ -72,6 +80,11 @@ export class SocketService {
   update_answer( data ) {
     console.log( 'Debug: SocketService: sent: update_answer - data:', data );
     this.socket.emit( 'update_answer', data );
+  }
+
+  commit_answer( data ) {
+    console.log( 'Debug: SocketService: sent: commit_answer - data:', data );
+    this.socket.emit( 'commit_answer', data );
   }
 
   //   let observable = new Observable( observer => {
