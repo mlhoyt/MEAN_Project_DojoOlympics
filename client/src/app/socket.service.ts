@@ -34,7 +34,8 @@ export class SocketService {
       });
 
       this.socket.on( 'commit_answer', (data) => {
-        console.log( 'Debug: SocketService: received: update_answer - data:', data );
+        console.log( 'Debug: SocketService: received: commit_answer - data:', data );
+        observer.next( data );
       });
 
       // -------------------- USER - RECEIVE --------------------

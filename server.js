@@ -71,6 +71,12 @@ let admin_data = {
   ],
 };
 
+let user_data = {
+  // question_num: 0
+  // question_text: ""
+  // question_end: false
+};
+
 io.on( 'connection', ( socket ) => {
 	console.log("Debug: Server: new socket connection:", socket.id );
   // We talked about storing team names and associated scores in session
@@ -92,7 +98,7 @@ io.on( 'connection', ( socket ) => {
 
 	socket.on( 'new_user', ( data ) => {
     console.log( "Debug: Server: received socket event 'new_user' with data:", data );
-    admin_data.teams.push( { sid: socket.id, name: data.user_name, answer: "", score: -1 } )
+    admin_data.teams.push( { sid: socket.id, name: data.user_name, answer: "", score: -1, commit: false } )
 		if( admin_id ) {
 			socket.to( admin_id ).emit( "new_user", admin_data );
       console.log( "Debug: Server: sent socket event 'new_user' to admin(", admin_id, ") with data:", admin_data );
@@ -121,8 +127,14 @@ io.on( 'connection', ( socket ) => {
 
 	socket.on( 'commit_answer', ( data ) => {
 		console.log( "Debug: Server: received socket event 'commit_answer' with data:", data );
-		socket.to( admin_id ).emit( "commit_answer", data );
-    console.log( "Debug: Server: sent socket event 'commit_answer' to admin(", admin_id, ") with data:", data );
+    for( let i in admin_data.teams ) {
+      let team = admin_data.teams[ i ];
+      if( team.sid == socket.id ) {
+        team.commit = true;
+      }
+    }
+		socket.to( admin_id ).emit( "commit_answer", admin_data );
+    console.log( "Debug: Server: sent socket event 'commit_answer' to admin(", admin_id, ") with data:", admin_data );
 	});
 
 	socket.on( 'end_question', () => {

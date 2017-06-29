@@ -5,21 +5,6 @@
   <button md-raised-button (click)="get_exam()">Submit</button>
 </md-card>
 
-<div *ngIf="team_dispay">
-<!-- card will be genereated after user input teamname -->
-  <md-card class="userList">
-    <md-card-title>Teams</md-card-title>
-    <md-card-content *ngFor="let team of admin_data.teams" style="margin: 16px 0;">
-      <md-grid-list cols="8" rowHeight="40px">
-        <md-grid-tile colspan="2">{{team.name}}</md-grid-tile>
-        <md-grid-tile colspan="1">Score: {{team.score}}</md-grid-tile>
-        <md-grid-tile colspan="4">{{ team.answer }}</md-grid-tile>
-        <md-grid-tile colspan="1"><button md-raised-button>Correct</button></md-grid-tile>
-      </md-grid-list>
-    </md-card-content>
-  </md-card>
-</div>
-
 <md-card *ngIf="all_exam.q_series.length > 0" class="questionAnswer" style="margin: 10px 0">
   <md-card-subtitle>Queston {{question_num + 1}}</md-card-subtitle>
   <md-card-title><pre>{{all_exam.q_series[question_num].text}}</pre></md-card-title>
@@ -30,3 +15,19 @@
     <button md-raised-button>Next</button>
   </md-card-actions>
 </md-card>
+
+<div *ngIf="team_dispay">
+<!-- card will be genereated after user input teamname -->
+  <md-card class="userList">
+    <md-card-title>Teams</md-card-title>
+    <md-card-content *ngFor="let team of admin_data.teams" style="margin: 16px 0;">
+      <md-grid-list cols="8" rowHeight="40px">
+        <md-grid-tile colspan="2">{{team.name}}</md-grid-tile>
+        <md-grid-tile colspan="1">Score: {{team.score}}</md-grid-tile>
+        <md-grid-tile colspan="4">{{ team.answer }}</md-grid-tile>
+        <md-grid-tile colspan="1"><button md-raised-button *ngIf="team.commit">Correct</button></md-grid-tile>
+      </md-grid-list>
+    </md-card-content>
+  </md-card>
+</div>
+
