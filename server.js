@@ -59,6 +59,18 @@ let admin_id = "";
 // Temporarily store users that connect before admin
 let user_backlog = [];
 
+let admin_data = {
+  teams: [
+    // {
+    //  sid: String,
+    //  name: String,
+    //  answer: String,
+    //  score: Number,
+    // },
+    // ...
+  ],
+};
+
 io.on( 'connection', ( socket ) => {
 	console.log("Debug: Server: new socket connection:", socket.id );
   // We talked about storing team names and associated scores in session
@@ -74,21 +86,16 @@ io.on( 'connection', ( socket ) => {
 	socket.on( 'new_admin', ( ) => {
     console.log( "Debug: Server: received socket event 'new_admin' with socket.id:", socket.id);
 		admin_id = socket.id;
-    console.log( "Debug: Server: processing user_backlog:" );
-    for( let user in user_backlog ) {
-			socket.emit( "new_user", user_backlog[ user ] );
-      console.log( "Debug: Server: sent socket event 'new_user' to admin(", admin_id, ") with data:", user_backlog[ user ] );
-    }
+		socket.emit( "new_user", admin_data );
+    console.log( "Debug: Server: sent socket event 'new_user' to admin(", admin_id, ") with data:", admin_data );
   });
 
 	socket.on( 'new_user', ( data ) => {
     console.log( "Debug: Server: received socket event 'new_user' with data:", data );
+    admin_data.teams.push( { sid: socket.id, name: data.user_name, answer: "", score: -1 } )
 		if( admin_id ) {
-			socket.to( admin_id ).emit( "new_user", data );
-      console.log( "Debug: Server: sent socket event 'new_user' to admin(", admin_id, ") with data:", data );
-		} else {
-			user_backlog.push( data );
-      console.log( "Debug: Server: stored 'new_user' to user_backlog:", data );
+			socket.to( admin_id ).emit( "new_user", admin_data );
+      console.log( "Debug: Server: sent socket event 'new_user' to admin(", admin_id, ") with data:", admin_data );
 		}
   });
 
@@ -99,9 +106,17 @@ io.on( 'connection', ( socket ) => {
   });
 
 	socket.on( 'update_answer', ( data ) => {
-		console.log( "Debug: Server: received socket event 'update_answer' with data:", data );
-		socket.to( admin_id ).emit( "update_answer", data );
-    console.log( "Debug: Server: sent socket event 'update_answer' to admin(", admin_id, ") with data:", data );
+		console.log( "Debug: Server: received socket event 'update_answer' from socket.id", socket.id, "with data:", data );
+    for( let i in admin_data.teams ) {
+      let team = admin_data.teams[ i ];
+      if( team.sid == socket.id ) {
+        team.answer = data.answer;
+	      console.log( "Debug: Server: socket event 'update_answer': matched socket.id:", socket.id, "to team.sid:", team.sid );
+        break;
+      }
+    }
+		socket.to( admin_id ).emit( "update_answer", admin_data );
+    console.log( "Debug: Server: sent socket event 'update_answer' to admin(", admin_id, ") with data:", admin_data );
 	});
 
 	socket.on( 'commit_answer', ( data ) => {

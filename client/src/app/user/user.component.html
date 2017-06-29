@@ -13,7 +13,7 @@
   <md-card-content style="background:#777;">
     <form class="userAnswer">
       <md-input-container>
-        <textarea mdInput placeholder="Your answer" name="answer_text" [(ngModel)]="answer_text" (keypress)="update_answer()"></textarea>
+        <textarea mdInput placeholder="Your answer" name="answer_text" [(ngModel)]="answer_text" (keyup)="update_answer()"></textarea>
       </md-input-container>
     </form>
   </md-card-content>

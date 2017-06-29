@@ -25,10 +25,12 @@ export class SocketService {
 
       this.socket.on( 'new_user', (data) => {
         console.log( 'Debug: SocketService: received: new_user - data:', data );
+        observer.next( data );
       });
 
       this.socket.on( 'update_answer', (data) => {
         console.log( 'Debug: SocketService: received: update_answer - data:', data );
+        observer.next( data );
       });
 
       this.socket.on( 'commit_answer', (data) => {
