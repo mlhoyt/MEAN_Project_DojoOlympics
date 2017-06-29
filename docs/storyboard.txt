@@ -1,0 +1,26 @@
+# -*- text -*-
+
+Description                                    admin             server             user
+====================================================================================================
+User_logsin_(login)                            -                 R-new_user         S-new_user
+-                                              R-new_user        S-new_user         -
+Admin_logsin_(login)                           S-new_admin       R-new_admin
+User_logsin_(login)                            -                 R-new_user         S-new_user
+-                                              R-new_user        S-new_user         -
+Admin_selects_exam_category                    -                 -                  -
+Admin_waits_for_all_users                      -                 -                  -
+Admin_clicks_SEND;Question_goes_to_users       S:send_question   R:new_question     -
+-_data:{...}                                   -                 S:new_question     R:new_question
+As_user_ANSWERS;Admin_sees_change              -                 R:update_answer    S:update_answer
+-_data:{team:string,answer:string}             R:update_answer   S:update_answer    -
+User_clicks_COMMIT;Admin_answer_changes_color  -                 R:commit_answer    S:commit_answer
+-_data:{team:string,answer:string}             R:commit_answer   S:commit_answer    -
+Admin_clicks_END;Admin_answers_all_commit      S:end_question    R:end_question     -
+-                                              -                 S:end_question     R:end_question
+Admin_selects_correct_answers                  -                 -                  -
+Admin_clicks_SHARE_RESULTS                     S:share_results   R:share_results
+-_data:[{team:string,score:number},...]        -                 S:share_results    R:share_results
+Admin_clicks_NEXT;REPEAT_Admin_clicks_SEND     -                 -                  -
+Admin_clicks_FINISH                            S:show_standings  R:show_standings   -
+-                                              -                 S:share_standings  R:show_standings
+
