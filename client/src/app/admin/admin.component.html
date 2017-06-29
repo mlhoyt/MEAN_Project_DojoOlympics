@@ -28,7 +28,7 @@
   <md-card-content><pre>{{all_exam.q_series[question_num].answer}}</pre></md-card-content>
   <md-card-actions>
     <button md-raised-button (click)="send_question()">Send</button>
-    <button md-raised-button>End</button>
+    <button md-raised-button (click)="end_question()">End</button>
     <button md-raised-button>Next</button>
   </md-card-actions>
 </md-card>

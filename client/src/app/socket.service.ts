@@ -17,6 +17,9 @@ export class SocketService {
     this.socket.on( 'new_question', (data) => {
      console.log('Got a new question', data)
    } );
+    this.socket.on( 'end_question', () => {
+     console.log('end question')
+   } );
   }
 
   // connect() {
@@ -53,6 +56,13 @@ export class SocketService {
   update_answer = (data) => {
     this.socket.emit( 'update_answer', data );
   }
+
+  //admin stops all users from answering quetsion
+  end_question(){
+    this.socket.emit ( 'end_question' );
+  }
+
+
 
   // get_clicks(){
   //   let observable = new Observable(observer => {

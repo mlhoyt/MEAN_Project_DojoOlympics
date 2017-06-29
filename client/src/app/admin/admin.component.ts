@@ -38,5 +38,8 @@ export class AdminComponent implements OnInit {
      question_text:this.all_exam.q_series[this.question_num].text
     });
   }
+  end_question(){
+    this._socket.end_question();
+  }
 
 }

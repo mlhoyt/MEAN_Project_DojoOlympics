@@ -88,6 +88,10 @@ io.on( 'connection', ( socket ) => {
 		console.log( "Debug: Server: received socket event 'update_answer' with data:", data );
 		socket.to(admin_id).emit(data);
 	});
+		socket.on( 'end_question', ( ) => {
+    console.log( "Debug: Server: received socket event 'end_question'" );
+		socket.broadcast.emit( "end_question" );
+  });
 });
 
 
