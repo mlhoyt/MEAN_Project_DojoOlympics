@@ -10,10 +10,10 @@ import { SocketService } from '../socket.service';
 export class UserComponent implements OnInit {
 
   //create and destory parts
-  show = false
-  noShow = true
+  show = true
+  noShow = false
 
-  user_data: any = { 'question_num': 0, 'question_text': '', 'question_end': false, 'correct': 0, 'score': 0};
+  user_data: any = { 'question_num': 0, 'question_text': '', 'question_end': false, 'correct': 0, 'score': 0, 'showResult': false};
   answer_text = "";
   socket = null;
 
@@ -41,7 +41,10 @@ export class UserComponent implements OnInit {
       answer: this.answer_text,
     });
     this.user_data.question_end = true;
+    this.noShow = this.show;
   }
+
+
   
 
 

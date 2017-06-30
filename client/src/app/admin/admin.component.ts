@@ -99,7 +99,11 @@ export class AdminComponent implements OnInit {
     //sort
     standing.sort((a,b) => b.score - a.score);
     //pass to server
-    this._socket.show_standings({standing:standing})
+    this._socket.show_standings(
+      {
+      standing:standing,
+      showStanding: true
+    });
     //send admin_data
 
     // total up score

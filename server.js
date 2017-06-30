@@ -111,7 +111,8 @@ io.on( 'connection', ( socket ) => {
     user_data = {
       question_num: data.question_num,
       question_text: data.question_text,
-      question_end: false
+      question_end: false,
+      showResult: false
     }
 		socket.broadcast.emit( "new_question", user_data );
     console.log( "Debug: Server: sent socket event 'new_question' to all users with data:", user_data );
@@ -161,8 +162,10 @@ io.on( 'connection', ( socket ) => {
     for( let i in admin_data.teams ) {
       let team = admin_data.teams[ i ];
       socket.to(team.sid).emit('share_results', {
+        'name': team.name,
         'correct': team.correct,
         'score': (team.score + team.correct),
+        'showResult': true
       });
       console.log( "Debug: Server: sent socket event 'share_results' to user (", team.name, ") with score:", team.score, "and correct:", team.correct );
 

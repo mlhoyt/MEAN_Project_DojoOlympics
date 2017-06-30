@@ -1,39 +1,47 @@
+<h2 class="center lightFont">Welcome to the Dojo Olympics!</h2>
+
 <!-- question card -->
 <md-card class = "cardSize" *ngIf="!user_data.question_end">
   <md-card-header>
     <md-card-subtitle>
       Question {{ user_data.question_num + 1 }}
     </md-card-subtitle>
-  </md-card-header>
-
-  <md-card-title>
+    <md-card-title>
     <pre>{{ user_data.question_text }}</pre>
-  </md-card-title>
-
+    </md-card-title>
+  </md-card-header>
   <md-card-content>
-    <form class="userAnswer">
-      <md-input-container>
-        <textarea mdInput placeholder="Your answer" name="answer_text" [(ngModel)]="answer_text" (keyup)="update_answer()"></textarea>
-      </md-input-container>
-    </form>
+    <md-input-container>
+      <textarea mdInput placeholder="Your answer" name="answer_text" [(ngModel)]="answer_text" (keyup)="update_answer()"></textarea>
+    </md-input-container>
   </md-card-content>
   <md-card-actions>
     <button md-raised-button (click)="commit_answer()">Submit</button>
   </md-card-actions>
 </md-card>
 
-<md-card class = "cardSize">
-  <h1> Waitng card </h1>
-  <md-card-content>
-    <h3>{{user_data.correct}}</h3>
-    <h3>{{user_data.score}}</h3>
+<md-card *ngIf="noShow || !user_data" class = "cardSize">
+  <md-card-header *ngIf="!user_data.showResult">
+    <md-card-title>
+      Answer is submited!
+    </md-card-title>
+    <md-card-subtitle>
+      Wating for instructor..
+    </md-card-subtitle>
+  </md-card-header>
+  <md-card-content *ngIf="user_data.showResult">
+    <h3 *ngIf="user_data.correct == 1"> You are clever, {{user_data.name}} </h3>
+    <h3 *ngIf="user_data.correct == 0"> Sorry {{user_data.name}}, better luck next time! </h3>
+    <h3> Your current team score is: {{user_data.score}} </h3>
   </md-card-content>
 </md-card>
 
-<md-card class = "cardSize">
-  <h1>  card </h1>
-  <md-card-content *ngFor = "let teamstand of standing">
-      <p>teamstand.name</p>
-      <p>teamstand.score</p>
+<md-card *ngIf="user_data.showStanding"class = "cardSize">
+  <h1> Dojo Standing </h1>
+  <md-card-content *ngFor = "let result of user_data.standing">
+    <md-grid-list cols="2" rowHeight="40px">
+      <md-grid-tile colspan="1">{{result.team}}</md-grid-tile>
+      <md-grid-tile colspan="1">Score: {{result.score}}</md-grid-tile>
+    </md-grid-list>
   </md-card-content>
 </md-card>
