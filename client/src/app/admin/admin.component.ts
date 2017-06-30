@@ -76,7 +76,7 @@ export class AdminComponent implements OnInit {
     }
     //loop to next question
     this.question_num += 1;
-    
+
   }
 
   correct_answer(team_sid) {
@@ -97,11 +97,11 @@ export class AdminComponent implements OnInit {
       standing.push({'team':team.name, 'score':team.score})
     }
     //sort
-    standing.sort((a,b) => a.score - b.score);
+    standing.sort((a,b) => b.score - a.score);
     //pass to server
     this._socket.show_standings({standing:standing})
     //send admin_data
-    
+
     // total up score
   }
 
