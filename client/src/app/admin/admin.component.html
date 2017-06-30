@@ -6,7 +6,7 @@
   <button md-raised-button (click)="get_exam()">Submit</button>
 </md-card>
 
-<md-card class="cardSize" *ngIf="all_exam.q_series.length > 0"  style="margin: 10px 0">
+<md-card class="cardSize" *ngIf="all_exam.q_series.length > 0">
   <md-card-subtitle>Queston {{question_num + 1}}</md-card-subtitle>
   <md-card-title><pre>{{all_exam.q_series[question_num].text}}</pre></md-card-title>
   <md-card-content>The suggested answer is: <pre>{{all_exam.q_series[question_num].answer}}</pre></md-card-content>

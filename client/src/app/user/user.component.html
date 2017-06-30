@@ -6,11 +6,11 @@
     </md-card-subtitle>
   </md-card-header>
 
-  <md-card-title style="background:#2196F3; padding:12px 0 12px 24px;">
+  <md-card-title>
     <pre>{{ user_data.question_text }}</pre>
   </md-card-title>
 
-  <md-card-content style="background:#777;">
+  <md-card-content>
     <form class="userAnswer">
       <md-input-container>
         <textarea mdInput placeholder="Your answer" name="answer_text" [(ngModel)]="answer_text" (keyup)="update_answer()"></textarea>
