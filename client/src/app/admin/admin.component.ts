@@ -24,6 +24,8 @@ export class AdminComponent implements OnInit {
     ],
   };
 
+
+
   constructor(
     private _serverApi: ServerApiService,
     private _socket: SocketService,
@@ -61,20 +63,20 @@ export class AdminComponent implements OnInit {
   next_question() {
     //send admin_data
     this._socket.share_results(this.admin_data)
-
     //update score
     //rest commit, answer, correct
     for( let i in this.admin_data.teams ) {
       let team = this.admin_data.teams[ i ];
       team.score += team.correct;
+      console.log(team.score);
+
       team.answer = "";
       team.commit = false;
       team.correct = 0;
     }
-
     //loop to next question
     this.question_num += 1;
-    console.log(this.question_num);
+    
   }
 
   correct_answer(team_sid) {
@@ -85,6 +87,22 @@ export class AdminComponent implements OnInit {
         break;
       }
     }
+  }
+
+  finished() {
+    this._socket.share_results(this.admin_data)
+    let standing =[]
+    for( let i in this.admin_data.teams ) {
+      let team = this.admin_data.teams[ i ];
+      standing.push({'team':team.name, 'score':team.score})
+    }
+    //sort
+    standing.sort((a,b) => a.score - b.score);
+    //pass to server
+    this._socket.show_standings({standing:standing})
+    //send admin_data
+    
+    // total up score
   }
 
 

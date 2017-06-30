@@ -12,7 +12,8 @@
   <md-card-actions>
     <button md-raised-button (click)="send_question()">Send</button>
     <button md-raised-button (click)="end_question()">End</button>
-    <button md-raised-button (click)="next_question()">Next</button>
+    <button md-raised-button *ngIf="question_num < all_exam.q_series.length - 1" (click)="next_question()">Next</button>
+    <button md-raised-button *ngIf="question_num >= all_exam.q_series.length - 1" (click)="finished()">FINISHED</button>
   </md-card-actions>
 </md-card>
 

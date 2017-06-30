@@ -29,3 +29,12 @@
     <h3>{{user_data.score}}</h3>
   </md-card-content>
 </md-card>
+
+<md-card class = "score card">
+  <h1>  card </h1>
+  <md-card-content *ngFor = "let teamstand of standing">
+      <p>teamstand.name</p>
+      <p>teamstand.score</p>
+
+  </md-card-content>
+</md-card>

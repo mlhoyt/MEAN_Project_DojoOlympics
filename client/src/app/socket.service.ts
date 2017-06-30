@@ -57,6 +57,7 @@ export class SocketService {
 
       this.socket.on( 'show_standings', ( data ) => {
         console.log( 'Debug: SocketService: received: show_standings - data:', data );
+        observer.next( data );
       });
 
       return () => { this.socket.disconnect(); }

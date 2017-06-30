@@ -42,6 +42,7 @@ export class UserComponent implements OnInit {
     });
     this.user_data.question_end = true;
   }
+  
 
 
 }
