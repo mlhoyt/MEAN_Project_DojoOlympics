@@ -156,14 +156,21 @@ io.on( 'connection', ( socket ) => {
   });
 
 	socket.on( 'share_results', ( data ) => {
+    admin_data = data;
 		console.log( "Debug: Server: received socket event 'share_results' with data:", data );
-    console.log( "Debug: Server: sent socket event 'share_results' to all users with data:", data );
     for( let i in admin_data.teams ) {
       let team = admin_data.teams[ i ];
-      socket.to(team.sid).emit('share_results', {'correct': team.correct,'score':team.score + team.correct})
-    console.log( "Debug: Server: sent socket event 'share_results' to indivdual users with score:", team.score, "and correct", team.correct);
+      socket.to(team.sid).emit('share_results', {
+        'correct': team.correct,
+        'score': (team.score + team.correct),
+      });
+      console.log( "Debug: Server: sent socket event 'share_results' to user (", team.name, ") with score:", team.score, "and correct:", team.correct );
+
+      team.answer = "";
+      team.commit = false;
+      team.score += team.correct;
+      team.correct = 0;
     }
-    
 	});
 
 	socket.on( 'show_standings', ( data ) => {
