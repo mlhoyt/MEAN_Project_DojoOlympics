@@ -1,16 +1,6 @@
-.center{
-  display: block;
-  text-align: center;
-}
 
-.login {
-  width: 50%;
-  margin: 10px auto;
-}
-.teamlogin{
-  width: 50%;
-  margin: 10px auto;
-}
+
+
 .loginInput {
   display: block;
   width: 100%;

@@ -1,5 +1,5 @@
 <!-- question card -->
-<md-card class = "question" *ngIf="!user_data.question_end">
+<md-card class = "cardSize" *ngIf="!user_data.question_end">
   <md-card-header>
     <md-card-subtitle>
       Question {{ user_data.question_num + 1 }}
@@ -22,7 +22,7 @@
   </md-card-actions>
 </md-card>
 
-<md-card class = "waiting">
+<md-card class = "cardSize">
   <h1> Waitng card </h1>
   <md-card-content>
     <h3>{{user_data.correct}}</h3>
@@ -30,11 +30,10 @@
   </md-card-content>
 </md-card>
 
-<md-card class = "score card">
+<md-card class = "cardSize">
   <h1>  card </h1>
   <md-card-content *ngFor = "let teamstand of standing">
       <p>teamstand.name</p>
       <p>teamstand.score</p>
-
   </md-card-content>
 </md-card>

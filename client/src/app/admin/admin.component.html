@@ -1,11 +1,12 @@
-<md-card class="chooseExam" *ngIf="exam_selected">
+<h1 class="center lightFont">Admin Panel</h1>
+<md-card class="cardSize" *ngIf="exam_selected">
   <md-select placeholder="Catagory" [(ngModel)]="exam_cat" name="exam_cat">
    <md-option *ngFor="let cat of all_cats" value="{{cat._id}}"> {{ cat.name }} </md-option>
   </md-select>
   <button md-raised-button (click)="get_exam()">Submit</button>
 </md-card>
 
-<md-card *ngIf="all_exam.q_series.length > 0" class="questionAnswer" style="margin: 10px 0">
+<md-card class="cardSize" *ngIf="all_exam.q_series.length > 0"  style="margin: 10px 0">
   <md-card-subtitle>Queston {{question_num + 1}}</md-card-subtitle>
   <md-card-title><pre>{{all_exam.q_series[question_num].text}}</pre></md-card-title>
   <md-card-content>The suggested answer is: <pre>{{all_exam.q_series[question_num].answer}}</pre></md-card-content>

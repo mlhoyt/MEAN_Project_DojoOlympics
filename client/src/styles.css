@@ -1,6 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 body {
-    background: #eee;
+    background-image: url(./assets/dojoanimated.gif);
+    background-size: cover; 
+    z-index: -1;
+}
+
+/*body:after {
+        content: "";
+        background-image:url(./assets/dojoanimated.gif);
+        background-position:center;
+        background-attachment:fixed;
+        background-size:cover;
+        opacity: 0.1;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: -1;
+    }*/
+
+.center{
+  display: block;
+  text-align: center;
+}
+
+.lightFont{
+  color: white;
+}
+
+.cardSize{
+  width: 50%;
+  margin: 10px auto;
 }
