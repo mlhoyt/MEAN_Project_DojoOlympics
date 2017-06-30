@@ -2,13 +2,12 @@
 
 <md-card class="login">
   <md-card-title>Admin login</md-card-title>
-
-      <md-card-content>
-        <md-input-container class="loginInput">
-          <input mdInput placeholder="Enter instructor phrase" type="text" name="adminPhrase" value="">
-        </md-input-container>
-      </md-card-content>
-        <button md-raised-button color="primary" (click)="newAdmin()">Enter</button>    
+    <md-card-content>
+      <md-input-container class="loginInput">
+        <input mdInput placeholder="Enter instructor phrase" type="text" name="adminPhrase" value="">
+      </md-input-container>
+    </md-card-content>
+    <button md-raised-button color="primary" (click)="newAdmin()">Enter</button>    
 </md-card>
 
 <!--<div *ngif="admin">-->
@@ -19,6 +18,6 @@
           <input mdInput placeholder="Enter your team name" name="user_name" [(ngModel)]="user_name" >
         </md-input-container>
     </md-card-content>
-    <button md-raised-button (click)="newUser()">Submit</button>
+    <button md-raised-button color="primary" (click)="newUser()">Submit</button>
   </md-card>
 <!--</div>-->
