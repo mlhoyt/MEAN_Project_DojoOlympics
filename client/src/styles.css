@@ -1,9 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import 'customize.css';
 
 body{
-  background: #999;
+  background: url(./assets/dojoUser.gif) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: 'Roboto', sans-serif;
 }
 
 .center{
@@ -17,5 +22,18 @@ body{
 
 .cardSize{
   width: 50%;
-  margin: 10px auto;
+  margin: 12px auto;
+}
+
+
+.fullWidth {
+  display: block;
+  width: 100%;
+}
+
+h1{
+  margin: 48px auto 24px;
+}
+h2{
+  margin: 48px auto 24px;
 }

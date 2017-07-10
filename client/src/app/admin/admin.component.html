@@ -1,4 +1,4 @@
-<h1 class="center lightFont">Admin Panel</h1>
+<div class="center lightFont"><h2>Admin Panel</h2></div>
 <md-card class="cardSize" *ngIf="exam_selected">
   <md-select placeholder="Catagory" [(ngModel)]="exam_cat" name="exam_cat">
    <md-option *ngFor="let cat of all_cats" value="{{cat._id}}"> {{ cat.name }} </md-option>
@@ -11,10 +11,10 @@
   <md-card-title><pre>{{all_exam.q_series[question_num].text}}</pre></md-card-title>
   <md-card-content>The suggested answer is: <pre>{{all_exam.q_series[question_num].answer}}</pre></md-card-content>
   <md-card-actions>
-    <button md-raised-button (click)="send_question()">Send</button>
+    <button md-raised-button color="primary" (click)="send_question()">Send</button>
     <button md-raised-button (click)="end_question()">End</button>
     <button md-raised-button *ngIf="question_num < all_exam.q_series.length - 1" (click)="next_question()">Next</button>
-    <button md-raised-button *ngIf="question_num >= all_exam.q_series.length - 1" (click)="finished()">FINISHED</button>
+    <button md-raised-button color="accent" *ngIf="question_num >= all_exam.q_series.length - 1" (click)="finished()">FINISHED</button>
   </md-card-actions>
 </md-card>
 

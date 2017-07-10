@@ -1,12 +1,5 @@
-body {
-  background: url(../../assets/dojoLoginSq.gif) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
 
-.loginInput {
-  display: block;
-  width: 100%;
+
+.title {
+  font-size: 16px;
 }
